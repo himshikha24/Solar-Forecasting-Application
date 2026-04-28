@@ -1,6 +1,6 @@
 
 from langchain_community.utilities import SQLDatabase
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain_core.prompts import PromptTemplate
@@ -9,7 +9,7 @@ import os
 
 load_dotenv()
 
-os.environ['API_KEY'] = os.getenv("OPENAI_API_KEY")
+os.environ['API_KEY'] = os.getenv("GROQ_API_KEY")
 
 
 def create_sql_agent():
@@ -19,8 +19,8 @@ def create_sql_agent():
 
     db = SQLDatabase.from_uri(f"sqlite:///{db_path}")
 
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
+    llm = ChatGroq(
+        model="llama-3.3-70b-versatile",
         temperature=0
     )
 
